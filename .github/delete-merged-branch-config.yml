@@ -1,4 +1,4 @@
 exclude: 
-  - development
+  - develop
   - main
 delete_closed_pr: true
