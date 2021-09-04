@@ -19,7 +19,7 @@ public class UploadController {
 
   @PostMapping("/new")
   public ResponseEntity<?> handleUpload(@RequestParam("file") MultipartFile file) throws IOException {
-    File javaFile = File.createTempFile("temp", "uploaded");
+    File javaFile = File.createTempFile("spreadsheet-", "");
     file.transferTo(javaFile);
 
     Workbook wb = WorkbookFactory.create(javaFile);
