@@ -1,5 +1,10 @@
 package com.unipampa.spreadsheetservice.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadController {
 
   @PostMapping("/new")
-  public ResponseEntity<?> handleUpload(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity<?> handleUpload(@RequestParam("file") MultipartFile file) throws IOException {
+    File javaFile = File.createTempFile("temp", "uploaded");
+    file.transferTo(javaFile);
 
-    return new ResponseEntity<>("All Good", HttpStatus.OK);
+    Workbook wb = WorkbookFactory.create(javaFile);
+
+    return new ResponseEntity<>(wb.getAllNames(), HttpStatus.OK);
   }
 }
