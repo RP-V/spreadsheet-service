@@ -1,6 +1,6 @@
 package com.unipampa.spreadsheetservice.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,9 +20,9 @@ public class Amostra {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long amostra;
-  private Date data;
-  private Long numero;
+  private Double amostra;
+  private LocalDate data;
+  private Double numero;
   private Boolean lvc;
   private Boolean morreu;
 
