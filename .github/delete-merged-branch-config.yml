@@ -1,4 +1,5 @@
 exclude: 
   - develop
   - main
+  - release/*
 delete_closed_pr: false
