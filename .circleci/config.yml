@@ -1,0 +1,116 @@
+version: 2.1
+
+jobs:
+#   start-docker:
+#     working_directory: ~/repo
+#     machine: 
+#       image: ubuntu-2004:202010-01
+#     steps:
+#       - checkout
+#       - run:
+#           name: Start docker
+#           command: docker-compose up -d
+  Build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+
+  Tests:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/openjdk:11.0
+      - image: circleci/mysql:latest
+        environment:
+          MYSQL_ROOT_PASSWORD: admin
+          MYSQL_DATABASE: crud_db
+    steps:
+      - checkout
+#     Temporary
+      - run: sudo apt-get update
+      - run: sudo apt-get install mysql-client
+      - run:
+          name: Install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Create spreadsheet database
+          command: mysql -uroot -padmin -e "create database spreadsheet_db" --protocol=tcp
+      - run:
+          name: Test
+          command: mvn test
+
+  Deploy-in-develop:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+      - checkout
+   
+  Deploy-in-staging:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+      - checkout
+
+  Deploy-in-production:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+      - checkout
+
+workflows:
+  version: 2
+  Build-Test-Deploy:
+    jobs:
+#     - start-docker
+      - Build
+      - Tests:
+          requires:
+            - Build
+
+      - hold:
+          type: approval
+          requires:
+            - Tests
+          filters:
+            branches:
+              only: main
+          
+      - Deploy-in-develop:
+          requires:
+            - Tests
+            - Build
+          filters:
+            branches:
+              only: develop
+              ignore: /pull\/.*/
+       
+      - Deploy-in-staging:
+          requires:
+            - Tests
+            - Build
+          filters:
+            branches:
+              only: /release\/.*/
+              ignore: /pull\/.*/
+
+      - Deploy-in-production:
+          requires:
+            - Build
+            - Tests
+            - hold
+          filters:
+            branches:
+              only: main
+              ignore: /pull\/.*/
