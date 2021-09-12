@@ -23,8 +23,8 @@ public class Localizacao {
   private String complemento;
   private String bairro;
   private String area;
-  private Float latitude;
-  private Float longitude;
+  private Double latitude;
+  private Double longitude;
 
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "proprietario_id")

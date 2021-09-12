@@ -30,9 +30,9 @@ public class AmostraSintoma {
   @JoinColumn(name = "sintoma_id", insertable = false, updatable = false)
   private Sintoma sintoma;
 
-  private Long intensidade;
+  private Double intensidade;
 
-  public AmostraSintoma(Amostra amostra, Sintoma sintoma, Long intensidade) {
+  public AmostraSintoma(Amostra amostra, Sintoma sintoma, Double intensidade) {
     this.amostra = amostra;
     this.sintoma = sintoma;
     this.intensidade = intensidade;

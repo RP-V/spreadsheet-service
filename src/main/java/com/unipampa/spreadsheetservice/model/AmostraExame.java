@@ -1,7 +1,5 @@
 package com.unipampa.spreadsheetservice.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,10 +30,10 @@ public class AmostraExame {
   @JoinColumn(name = "exame_id", insertable = false, updatable = false)
   private Exame exame;
 
-  private Date data;
+  private String data;
   private String resultado;
 
-  public AmostraExame(Amostra amostra, Exame exame, Date data, String resultado) {
+  public AmostraExame(Amostra amostra, Exame exame, String data, String resultado) {
     this.amostra = amostra;
     this.exame = exame;
     this.data = data;
