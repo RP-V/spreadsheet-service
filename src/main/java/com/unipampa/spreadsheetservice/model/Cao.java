@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+@JsonIgnoreProperties(value = {"id", "amostra"})
 @Data
 @Entity
 public class Cao {

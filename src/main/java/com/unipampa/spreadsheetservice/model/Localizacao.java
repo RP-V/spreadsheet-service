@@ -8,9 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+@JsonIgnoreProperties(value = {"id", "proprietario"})
 @Data
 @Entity
 public class Localizacao {

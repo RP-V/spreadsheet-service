@@ -1,6 +1,5 @@
 package com.unipampa.spreadsheetservice.model;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+@JsonIgnoreProperties(value = {"id"})
 @Data
 @Entity
 public class Amostra {
@@ -21,7 +22,7 @@ public class Amostra {
   private Long id;
 
   private Double amostra;
-  private LocalDate data;
+  private String data;
   private Double numero;
   private Boolean lvc;
   private Boolean morreu;

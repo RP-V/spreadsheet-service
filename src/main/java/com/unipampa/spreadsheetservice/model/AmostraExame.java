@@ -7,11 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonIgnoreProperties(value = {"id", "amostra"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,9 +32,9 @@ public class AmostraExame {
   private Exame exame;
 
   private String data;
-  private String resultado;
+  private Boolean resultado;
 
-  public AmostraExame(Amostra amostra, Exame exame, String data, String resultado) {
+  public AmostraExame(Amostra amostra, Exame exame, String data, Boolean resultado) {
     this.amostra = amostra;
     this.exame = exame;
     this.data = data;
