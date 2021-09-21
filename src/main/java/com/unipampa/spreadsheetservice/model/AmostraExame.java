@@ -1,0 +1,43 @@
+package com.unipampa.spreadsheetservice.model;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@JsonIgnoreProperties(value = {"id", "amostra"})
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+public class AmostraExame {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "amostra_id", insertable = false, updatable = false)
+  private Amostra amostra;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "exame_id", insertable = false, updatable = false)
+  private Exame exame;
+
+  private String data;
+  private Boolean resultado;
+
+  public AmostraExame(Amostra amostra, Exame exame, String data, Boolean resultado) {
+    this.amostra = amostra;
+    this.exame = exame;
+    this.data = data;
+    this.resultado = resultado;
+  }
+}
