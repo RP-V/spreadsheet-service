@@ -21,16 +21,9 @@ spring:
   jmx:
     enabled: false
   datasource:
-    url: jdbc:mysql://localhost:3306/spreadsheet_db?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: admin
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/eureka
+    url: jdbc:mysql://sql10.freesqldatabase.com:3306/sql10440821?useTimezone=true&serverTimezone=UTC
+    username: sql10440821
+    password: 5Chen52ZPx
 
 rabbitmq:
   exchange: spreadsheet
