@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  heroku: circleci/heroku@1.2.6
+
 jobs:
 #   start-docker:
 #     working_directory: ~/repo
@@ -49,11 +52,13 @@ jobs:
           command: mvn test
 
   Deploy-in-develop:
-    docker:
-      - image: cimg/openjdk:11.0
-
+    executor: heroku/default
+    environment:
+      HEROKU_APP_NAME: "spreadsheet-service-develop"
     steps:
       - checkout
+      - heroku/install
+      - heroku/deploy-via-git
    
   Deploy-in-staging:
     docker:
