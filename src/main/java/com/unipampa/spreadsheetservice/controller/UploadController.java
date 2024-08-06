@@ -13,8 +13,6 @@ import java.util.Set;
 import com.unipampa.spreadsheetservice.model.Acao;
 import com.unipampa.spreadsheetservice.model.Amostra;
 import com.unipampa.spreadsheetservice.model.AmostraAcao;
-import com.unipampa.spreadsheetservice.model.AmostraExame;
-import com.unipampa.spreadsheetservice.model.AmostraSintoma;
 import com.unipampa.spreadsheetservice.model.Cao;
 import com.unipampa.spreadsheetservice.model.Exame;
 import com.unipampa.spreadsheetservice.model.Localizacao;
@@ -95,19 +93,20 @@ public class UploadController {
           continue;
         else if (row.getCell(1).toString() == "")
           continue;
-        Amostra a = new Amostra();
-        Cao cao = new Cao();
-        Proprietario p = new Proprietario();
-        Set<Localizacao> locSet = new HashSet<Localizacao>();
-        Localizacao loc = new Localizacao();
-        Set<AmostraSintoma> sintSet = new HashSet<AmostraSintoma>();
-        Set<AmostraAcao> acaoSet = new HashSet<AmostraAcao>();
-        Set<AmostraExame> exameSet = new HashSet<AmostraExame>();
-        AmostraExame amostra_exame_tr = new AmostraExame();
-        AmostraExame amostra_exame_elisa = new AmostraExame();
+        //instanciação dos objetos ----------------------------
+//        Amostra a = new Amostra();
+//        Cao cao = new Cao();
+//        Proprietario p = new Proprietario();
+//        Set<Localizacao> locSet = new HashSet<Localizacao>();
+//        Localizacao loc = new Localizacao();
+//        Set<AmostraSintoma> sintSet = new HashSet<AmostraSintoma>();
+//        Set<AmostraAcao> acaoSet = new HashSet<AmostraAcao>();
+//        Set<AmostraExame> exameSet = new HashSet<AmostraExame>();
+//        AmostraExame amostra_exame_tr = new AmostraExame();
+//        AmostraExame amostra_exame_elisa = new AmostraExame();
         for (Cell cell : row) {
-          AmostraSintoma amostra_sint = new AmostraSintoma();
-          AmostraAcao amostra_acao = new AmostraAcao();
+//          AmostraSintoma amostra_sint = new AmostraSintoma();
+//          AmostraAcao amostra_acao = new AmostraAcao();
           String h = parse(headerRow.getCell(cell.getColumnIndex()).toString());
           if (!headers.contains(h) && h != null) {
             headers.add(h);
